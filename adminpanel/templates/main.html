@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}">
+
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'css/icons.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css">
+
+    {% if request.path|slice:'-1' == "" %}
+    <!-- morris css -->
+    <link rel="stylesheet" href="{% static 'css/morris.css' %}">
+    {% endif %}
+
+    {% if request.path|slice:'-1' == "/upload-form" %}
+    <!-- Dropzone css -->
+    <link href="{% static 'css/dropzone.css' %}" rel="stylesheet" type="text/css">
+
+    <!-- Multiselect css -->
+    <link href="{% static 'css/bootstrap-multiselect.css' %}" rel="stylesheet" type="text/css">
+    {% endif %}
+
+    <!-- jQuery  -->
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/modernizr.min.js' %}"></script>
+    <script src="{% static 'js/detect.js' %}"></script>
+    <script src="{% static 'js/fastclick.js' %}"></script>
+    <script src="{% static 'js/jquery.slimscroll.js' %}"></script>
+    <script src="{% static 'js/jquery.blockUI.js' %}"></script>
+    <script src="{% static 'js/waves.js' %}"></script>
+    <script src="{% static 'js/jquery.nicescroll.js' %}"></script>
+    <script src="{% static 'js/jquery.scrollTo.min.js' %}"></script>
+
+    {% if request.path|slice:'-1' == "/upload-form" %}
+    <!-- Dropzone js -->
+    <script src="{% static 'js/dropzone.js' %}"></script>
+
+    <!-- forms js -->
+    <script src="{% static 'js/bootstrap-multiselect.js' %}"></script>
+    <script src="{% static 'js/parsley.min.js' %}"></script>
+    <script>
+        $(document).ready(function() {
+            // Get age
+            $("#lbl_dob").focusout(function () {
+                dob = new Date($("#lbl_dob").val());
+                var today = new Date();
+                var age = Math.floor((today-dob) / (365.25 * 24 * 60 * 60 * 1000));
+                $('#lbl_age').val(age);
+            })
+
+            $('#upload_form').parsley();
+
+            $("#btn_reset").click(function() {
+                $('#multiselect').val('').multiselect('refresh');
+            });
+
+            $('#upload_form').on('submit', function(event){
+                event.preventDefault();
+                console.log("form submitted!")  // sanity check
+                $.ajax({
+                    url : "{% url 'submit-upload-form' %}", // the endpoint
+                    type : "POST", // http method
+                    data : $(this).serialize(), // data sent with the post request
+
+                    // handle a successful response
+                    success: function(res) {
+                        // $("#btn_reset").click()
+                        alert(res)
+                    },
+                    error: function (res) {
+                        alert(res)
+                    }
+                });
+            });
+
+            $('#multiselect').multiselect({
+                // enableFiltering: true,
+                // filterPlaceholder: 'Search for something...',
+                // enableCaseInsensitiveFiltering: true,
+                // templates: {
+                //     ul: '<ul class="multiselect-container dropdown-menu"></ul>',
+                //     filter: '<div class="input-group"><span class="input-group-addon"><i class="fa fa-search"></i></span><input class="form-control multiselect-search" type="text"></div>',
+                // },
+                // includeSelectAllOption: true,
+                // selectAllText: 'Select all!'
+            });
+        });
+    </script>
+    {% endif %}
+
+    {% csrf_token %}
+</head>
+<body>
+
+    <!-- Begin page -->
+    <div id="wrapper">
+        {% include 'nav.html' %}
+        <!-- Start right Content here -->
+        <div class="content-page">
+            <!-- Start content -->
+            <div class="content">
+                {% include 'topbar.html' %}
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+
+
+    {% if request.path|slice:'-1' == "" %}
+    <!--Morris Chart-->
+    <script src="{% static 'js/morris.min.js' %}"></script>
+    <script src="{% static 'js/raphael.min.js' %}"></script>
+
+    <!-- dashboard js -->
+    <script src="{% static 'js/pages/dashboard.int.js' %}"></script>
+    {% endif %}
+
+
+
+    <!-- App js -->
+    <script src="{% static 'js/app.js' %}"></script>
+</body>
+</html>

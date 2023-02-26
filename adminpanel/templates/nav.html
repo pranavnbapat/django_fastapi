@@ -1,0 +1,25 @@
+{% load static %}
+<div class="left side-menu">
+    <button type="button" class="button-menu-mobile button-menu-mobile-topbar open-left waves-effect">
+        <i class="mdi mdi-close"></i>
+    </button>
+    <div class="left-side-logo d-block d-lg-none">
+        <div class="text-center">
+            <a href="index.html" class="logo"><img src="{% static 'images/logo_dark.png' %}" height="20" alt="logo"></a>
+        </div>
+    </div>
+    <div class="sidebar-inner slimscrollleft">
+        <div id="sidebar-menu">
+            <ul>
+                {% for i in admin_menu %}
+                <li>
+                    <a href="/{{ i.menu_route }}" class="waves-effect">
+                        <i class="dripicons-{{ i.menu_icon }}"></i>
+                        <span> {{ i.menu_name }} </span>
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>

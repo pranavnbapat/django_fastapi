@@ -1,0 +1,125 @@
+{%  extends "main.html" %}
+
+{%  block content %}
+<div class="page-content-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-title-box">
+                    <div class="row align-items-center">
+                        <div class="col-md-8">
+                            <h4 class="page-title m-0">Upload Form</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card m-b-30">
+                    <div class="card-body">
+
+                        <h4 class="mt-0 header-title">Some other text (optional)</h4>
+
+                        <form action="#" id="upload_form" name="upload_form" method="POST">
+
+                            {% csrf_token %}
+                            {{ form.as_p }}
+
+                            <div class="form-group row">
+                                <label for="name" class="col-sm-2 col-form-label">Name</label>
+                                <div class="col-sm-10">
+                                    <input class="form-control" type="text" placeholder="Pranav" id="name" name="name" value="Pranav" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="email" class="col-sm-2 col-form-label">Email</label>
+                                <div class="col-sm-10">
+                                    <input class="form-control" type="email" placeholder="pranav.g33k@gmail.com" value="pranav.g33k@gmail.com" id="email" name="email" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="url" class="col-sm-2 col-form-label">URL</label>
+                                <div class="col-sm-10">
+                                    <input class="form-control" type="url" placeholder="https://fastapi.tiangolo.com/#installation" value="https://fastapi.tiangolo.com/#installation" id="url" name="url" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="password" class="col-sm-2 col-form-label">Password</label>
+                                <div class="col-sm-10">
+                                    <input class="form-control" type="password" value="hunter2" id="password" name="password">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="gender" class="col-sm-2 col-form-label">Gender</label>
+                                <div class="col-sm-10">
+                                    <label class="radio-inline">
+                                        <input type="radio" value="m" id="male" name="gender" checked> Male
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" value="f" id="female" name="gender"> Female
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" value="o" id="other" name="gender"> Other
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="dob" class="col-sm-2 col-form-label">Date of Birth</label>
+                                <div class="col-sm-10">
+                                    <input class="form-control" type="date" id="dob" required value="13-12-1988" name="dob">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="age" class="col-sm-2 col-form-label">Age:</label>
+                                <div class="col-sm-10">
+                                    <input class="form-control" type="number" id="age" readonly name="age">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Select</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control">
+                                        <option>Select</option>
+                                        <option>Large select</option>
+                                        <option>Small select</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Multiple select with checkbox</label>
+                                <div class="col-sm-10">
+                                    <select id="multiselect" multiple="multiple">
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                    </select>
+                                </div>
+                            </div>
+<!--                            <div class="form-group row">-->
+<!--                                <label for="file" class="col-sm-2 col-form-label">File Upload</label>-->
+<!--                                <div class="col-sm-10">-->
+<!--                                    <div class="fallback dropzone needsclick dz-clickable">-->
+<!--                                        <input name="file" type="file" id="file" multiple="multiple">-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+                            <div class="form-group">
+                                <div class="col-sm-10">
+                                    <button type="submit" class="btn btn-primary waves-effect waves-light">
+                                        Submit
+                                    </button>
+                                    <button type="reset" class="btn btn-secondary waves-effect m-l-5" id="btn_reset">
+                                        Reset
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div> <!-- end col -->
+        </div> <!-- end row -->
+    </div>
+</div>
+{%  endblock %}
